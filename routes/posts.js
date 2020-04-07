@@ -42,4 +42,16 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+router.patch("/:id", async (req, res) => {
+  try {
+    const post = await Post.updateOne(
+      { _id: req.params.id },
+      { $set: { title: req.body.title } }
+    );
+    res.json(post);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+
 module.exports = router;
