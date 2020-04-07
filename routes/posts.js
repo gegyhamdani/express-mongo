@@ -24,4 +24,22 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    res.json(post);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const post = await Post.remove({ _id: req.params.id });
+    res.json(post);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+
 module.exports = router;
